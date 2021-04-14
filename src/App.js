@@ -45,10 +45,12 @@ console.log(movies)
                      <Movie
                          key={movie.id}
                          movie ={movie}
-                         id={movie.id}
+                         movieId={movie.id}
                          title={movie.title}
                          overview={movie.overview}
                          releaseDate={movie.release_date}
+                         posterPath = {movie.poster_path}
+                         apiKey={apiKey}
 
 
 
