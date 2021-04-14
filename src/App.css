@@ -1,21 +1,22 @@
 .App {
   text-align: center;
-  background-color: whitesmoke;
+  background-color: #141414;
 }
 
 
 .App-header{
   background-color: #0d253f;
 padding:26px;
+  display: flex;
 }
 .App-logo {
-
   height: 30px;
 }
 
 .movie-container{
 display: flex;
   flex-wrap: wrap;
+
 }
 
 
