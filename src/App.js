@@ -40,7 +40,7 @@ console.log(movies)
 
 
       </header>
-            <div>
+            <div className={'movie-container'}>
                 {movies && movies.map((movie) => (
                      <Movie
                          key={movie.id}

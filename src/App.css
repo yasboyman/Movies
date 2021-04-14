@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: whitesmoke;
 }
 
 
@@ -10,6 +11,11 @@ padding:26px;
 .App-logo {
 
   height: 30px;
+}
+
+.movie-container{
+display: flex;
+  flex-wrap: wrap;
 }
 
 
