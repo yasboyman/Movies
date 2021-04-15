@@ -18,6 +18,11 @@ display: flex;
   flex-wrap: wrap;
 
 }
+.search {
+padding: 15px;
+  margin-left: 50%;
+  border-radius: 20px;
+}
 
 
 

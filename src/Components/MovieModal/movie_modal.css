@@ -1,0 +1,24 @@
+.movie-modal {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+}
+
+.movie-div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 700px;
+    width: 900px;
+    border-radius: 4px;
+    background-color: whitesmoke;
+    overflow: auto;
+    outline: none;
+    padding: 8px;
+
+
+}
+

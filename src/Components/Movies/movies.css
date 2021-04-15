@@ -15,12 +15,12 @@
 .move-desc-popup{
 position: absolute;
 
-    color: #141414;
+    color: whitesmoke;
     left:0;
     right: 0;
     bottom:0;
-    background-color: whitesmoke;
-    transform: translateY(100%);
+    background-color: #141414;
+    transform: translateY(105%);
     transition: transform 0.3s ease-in-out;
 
 }
