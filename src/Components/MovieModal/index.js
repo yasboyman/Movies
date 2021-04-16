@@ -2,6 +2,7 @@ import React from 'react'
 import {Button, Modal} from '@material-ui/core';
 import './movie_modal.css';
 import Movie from "../Movies";
+import { FaWindowClose } from "react-icons/fa";
 
 
 
@@ -37,7 +38,9 @@ const MovieModal = ({isOpen, onClose, currentMov}) => {
              className="movie-modal"
              >
                     <div className='movie-modal-container'>
-                         <h2 className='movie--modal-title'> {currentMov.title} </h2>
+                        <FaWindowClose size={40} className="icon" onClick={handleClose}/>
+
+                        <h2 className='movie--modal-title'> {currentMov.title} </h2>
                         <div className='movie-info'>
                             <Movie
                                 posterPath={currentMov.backdrop_path}
