@@ -4,9 +4,17 @@
     height: 100vh;
     width: 100%;
     align-items: center;
+
 }
 
-.movie-div {
+
+.movie-modal-container img {
+    max-width: 300px;
+}
+
+
+
+.movie-modal-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -14,11 +22,20 @@
     height: 700px;
     width: 900px;
     border-radius: 4px;
-    background-color: whitesmoke;
+    background-color: #0d253f;
     overflow: auto;
     outline: none;
     padding: 8px;
+    font-size: 12px;
+    border: solid 1px whitesmoke;
 
 
+
+}
+
+.movie-info{
+    background-color: #0d253f;
+    flex-direction: column;
+    width: 97%
 }
 

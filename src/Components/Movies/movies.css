@@ -25,6 +25,10 @@ position: absolute;
 
 }
 
+.movie-desc{
+    pointer-events: none;
+}
+
 .movie:hover .move-desc-popup {
     transform: translateY(0%);
 }

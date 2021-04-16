@@ -11,6 +11,7 @@ const App = () => {
     const [loading, setLoading] = useState(true);
     const [searchedMovie, setSearchedMovie] = useState([])
     const [currentMovie, setCurrentMovie] = useState([])
+    const [movieGenre, setMovieGenre] = useState([])
 
     const apiKey =  '547b4693cebd0509a71cadc54d008d4f'
 
@@ -36,6 +37,8 @@ const App = () => {
     }, [])
 
 console.log(movies)
+    console.log('current movie:: ', currentMovie)
+
 
 
     const  handleInputSubmit = (e) => {
@@ -57,7 +60,7 @@ console.log(movies)
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        <div>
+        <div className='search'>
             <form onSubmit={handleInputSubmit}>
 
                 <input
@@ -78,15 +81,9 @@ console.log(movies)
         <MovieModal
         isOpen={currentMovie !== null}
         onClose={() => setCurrentMovie(null)}
+        currentMov = {{...currentMovie}}
+
         />
-
-
-
-
-
-
-
-
 
             <div className={'movie-container'}>
                 {movies && movies.map((movie) => (
@@ -100,6 +97,7 @@ console.log(movies)
                          posterPath = {movie.poster_path}
                          apiKey={apiKey}
                          handleClick={() => setCurrentMovie(movie)}
+                         isOverview
 
 
 
