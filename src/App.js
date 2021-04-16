@@ -16,13 +16,14 @@ const App = () => {
     const apiKey =  '547b4693cebd0509a71cadc54d008d4f'
 
 
+console.log('this is genre', movieGenre)
 
 
-
-    const fetchData = async (path, callback, newpath) => {
+    const fetchData = async (path, callback) => {
         try{
-            const response = await axios.get(`https://api.themoviedb.org/3/movie/${path}?api_key=${apiKey} `)
-            callback(response.data.results)
+            const response = await axios.get(`https://api.themoviedb.org/3/${path}?api_key=${apiKey} `)
+                console.log('RE!!!!!!,', response.data)
+            callback(response.data )
         } catch (e) {
             console.log('error', e)
         }
@@ -30,14 +31,15 @@ const App = () => {
 
     useEffect(() => {
         Promise.all([
-            fetchData('top_rated', setMovies),
+            fetchData('movie/top_rated', setMovies),
+            fetchData('genre/movie/list', setMovieGenre),
         ]).then(() => {
             setLoading(false)
         })
     }, [])
 
-console.log(movies)
-    console.log('current movie:: ', currentMovie)
+console.log('this is movies',movies)
+
 
 
 
@@ -86,7 +88,7 @@ console.log(movies)
         />
 
             <div className={'movie-container'}>
-                {movies && movies.map((movie) => (
+                {movies.results && movies.results.map((movie) => (
                      <Movie
                          key={movie.id}
                          movie ={movie}

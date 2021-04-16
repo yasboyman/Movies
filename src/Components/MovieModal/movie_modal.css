@@ -8,8 +8,8 @@
 }
 
 
-.movie-modal-container img {
-    max-width: 300px;
+.movie-modal-container posterPath {
+    max-width: 100%;
 }
 
 
@@ -28,6 +28,7 @@
     padding: 8px;
     font-size: 12px;
     border: solid 1px whitesmoke;
+    position: relative;
 
 
 
@@ -37,5 +38,9 @@
     background-color: #0d253f;
     flex-direction: column;
     width: 97%
+}
+
+.movie--modal-title{
+    color: whitesmoke;
 }
 

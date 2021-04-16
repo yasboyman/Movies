@@ -9,6 +9,12 @@ import Movie from "../Movies";
 const MovieModal = ({isOpen, onClose, currentMov}) => {
 
 
+
+    if (!currentMov) return null;
+
+
+
+
     const handleClose = () => {
         onClose()
         // setSelectedActor(null);
@@ -31,20 +37,14 @@ const MovieModal = ({isOpen, onClose, currentMov}) => {
              className="movie-modal"
              >
                     <div className='movie-modal-container'>
-                         <h2> {currentMov.title} </h2>
+                         <h2 className='movie--modal-title'> {currentMov.title} </h2>
                         <div className='movie-info'>
                             <Movie
                                 posterPath={currentMov.backdrop_path}
                                 overview={currentMov.overview}
-
+                                modalIsOn
 
                             />
-                            {/*{  currentMov.genre_ids.map( item => {*/}
-                            {/*    return (*/}
-                            {/*        <Button style={{color:'white'}}>item</Button>*/}
-                            {/*    )*/}
-
-                            {/*})}*/}
 
                         </div>
 
