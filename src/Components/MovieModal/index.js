@@ -7,13 +7,42 @@ import { FaWindowClose } from "react-icons/fa";
 
 
 
-const MovieModal = ({isOpen, onClose, currentMov}) => {
+const MovieModal = ({isOpen, onClose, currentMov, movieGenre}) => {
+
 
 
 
     if (!currentMov) return null;
 
 
+    // console.log('movieGenre',movieGenre)
+    // console.log('!currentMovID!',currentMov.genre_ids)
+
+
+
+
+
+    // const mapping =  currentMov.genre_ids && currentMov.genre_ids.map( id => id)
+
+     const  filteringGenre = currentMov.genre_ids && movieGenre && movieGenre.map( genre => {
+
+        const filtered =  currentMov.genre_ids.find( x =>  x === genre
+         )
+
+         if (genre.id === filtered ){
+
+             console.log('WORKING!!!!!!!!!!!!!!', genre.name)         }
+         return (
+                 <div>
+             <Button>genre.name</Button>
+             </div>
+         )
+
+     })
+
+
+
+console.log('h', filteringGenre)
 
 
     const handleClose = () => {
@@ -22,7 +51,6 @@ const MovieModal = ({isOpen, onClose, currentMov}) => {
         // setCurrentMovie([]);
     }
 
-    console.log('MODAL', currentMov.genre_ids)
 
     // movieId={currentMovie.id}
     // title={currentMovie.title}

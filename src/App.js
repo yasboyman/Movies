@@ -4,6 +4,7 @@ import './App.css';
 import axios from "axios";
 import Movie from './Components/Movies/index'
 import MovieModal from "./Components/MovieModal";
+import Characters from "./Components/Characters";
 
 const App = () => {
 
@@ -12,18 +13,19 @@ const App = () => {
     const [searchedMovie, setSearchedMovie] = useState([])
     const [currentMovie, setCurrentMovie] = useState([])
     const [movieGenre, setMovieGenre] = useState([])
+    const [person, setPerson] = useState([])
 
     const apiKey =  '547b4693cebd0509a71cadc54d008d4f'
 
 
-console.log('this is genre', movieGenre)
+
 
 
     const fetchData = async (path, callback) => {
         try{
             const response = await axios.get(`https://api.themoviedb.org/3/${path}?api_key=${apiKey} `)
                 console.log('RE!!!!!!,', response.data)
-            callback(response.data )
+            callback(response.data)
         } catch (e) {
             console.log('error', e)
         }
@@ -33,14 +35,17 @@ console.log('this is genre', movieGenre)
         Promise.all([
             fetchData('movie/top_rated', setMovies),
             fetchData('genre/movie/list', setMovieGenre),
+            fetchData('/person/', setPerson),
+
         ]).then(() => {
             setLoading(false)
         })
     }, [])
 
-console.log('this is movies',movies)
 
 
+
+    console.log('****', movieGenre)
 
 
     const  handleInputSubmit = (e) => {
@@ -84,6 +89,7 @@ console.log('this is movies',movies)
         isOpen={currentMovie !== null}
         onClose={() => setCurrentMovie(null)}
         currentMov = {{...currentMovie}}
+        movieGenre={movieGenre.genres}
 
         />
 
@@ -100,14 +106,19 @@ console.log('this is movies',movies)
                          apiKey={apiKey}
                          handleClick={() => setCurrentMovie(movie)}
                          isOverview
-
-
-
-
-
                      />
                 ))}
             </div>
+
+                            <div className={'characters'}>
+                                {movies.results && movies.results.map((movie) => (
+                                    <Characters
+                                        key={movie.id}
+                                        movie ={movie}
+                                        movieId={movie.id}
+                                        apiKey={apiKey}
+                                    /> ))}
+                                    </div>
 
         {loading && 'Loading...'}
     </div>
