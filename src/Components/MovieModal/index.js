@@ -1,92 +1,66 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button, Modal} from '@material-ui/core';
 import './movie_modal.css';
 import Movie from "../Movies";
 import { FaWindowClose } from "react-icons/fa";
+import Characters from '../Characters';
+import axios from 'axios';
 
+const MovieModal = ({isOpen, onClose, currentMov, movieGenre, apiKey}) => {
+    const [cast, setCast] = useState([])
 
-
-
-const MovieModal = ({isOpen, onClose, currentMov, movieGenre}) => {
-
-
-
+    useEffect( () => {
+        currentMov.id && axios.get(`https://api.themoviedb.org/3/movie/${currentMov.id}/credits?api_key=${apiKey}`)
+            .then((response) => {
+                setCast(response.data)
+            }, (error) => {
+                console.log(error);
+            })
+    },[currentMov.id])
 
     if (!currentMov) return null;
 
-
-    // console.log('movieGenre',movieGenre)
-    // console.log('!currentMovID!',currentMov.genre_ids)
-
-
-
-
-
-    // const mapping =  currentMov.genre_ids && currentMov.genre_ids.map( id => id)
-
-     const  filteringGenre = currentMov.genre_ids && movieGenre && movieGenre.map( genre => {
-
-        const filtered =  currentMov.genre_ids.find( x =>  x === genre
-         )
-
-         if (genre.id === filtered ){
-
-             console.log('WORKING!!!!!!!!!!!!!!', genre.name)         }
-         return (
-                 <div>
-             <Button>genre.name</Button>
-             </div>
-         )
-
-     })
-
-
-
-console.log('h', filteringGenre)
+    const genres = currentMov.genre_ids && movieGenre.filter(genre => currentMov.genre_ids.includes(genre.id))
 
 
     const handleClose = () => {
         onClose()
-        // setSelectedActor(null);
-        // setCurrentMovie([]);
+        setCast(null)
     }
-
-
-    // movieId={currentMovie.id}
-    // title={currentMovie.title}
-    // overview={currentMovie.overview}
-    // releaseDate={currentMovie.release_date}
-    // posterPath = {currentMovie.poster_path}
-    // apiKey={apiKey}
 
     return (
         <Modal
-             open={isOpen}
-             onBackdropClick={handleClose}
-             className="movie-modal"
-             >
-                    <div className='movie-modal-container'>
-                        <FaWindowClose size={40} className="icon" onClick={handleClose}/>
+            open={isOpen}
+            onBackdropClick={handleClose}
+            className="movie-modal"
+        >
+            <div className='movie-modal-container'>
+                <FaWindowClose size={40} className="icon" onClick={handleClose}/>
+                <h2 className='movie--modal-title'> {currentMov.title} </h2>
 
-                        <h2 className='movie--modal-title'> {currentMov.title} </h2>
-                        <div className='movie-info'>
-                            <Movie
-                                posterPath={currentMov.backdrop_path}
-                                overview={currentMov.overview}
-                                modalIsOn
-
-                            />
-
-                        </div>
-
-                 </div>
-            </Modal>
-
+                <div className={'movie_genre'}>
+                {genres && genres.map(genre =>
+                    <button>{genre.name} </button>)}
+                </div>
+                <div className='movie-info'>
+                    <Movie
+                        posterPath={currentMov.backdrop_path}
+                        overview={currentMov.overview}
+                        modalIsOn
+                    />
+                </div>
+                <div className={'characters'}>
+                    <Characters
+                        key={currentMov.id}
+                        movie ={currentMov}
+                        movieId={currentMov.id}
+                        apiKey={apiKey}
+                        cast={cast}
+                    />
+                </div>
+            </div>
+        </Modal>
     )
-
-
-
 }
-
 
 export default MovieModal

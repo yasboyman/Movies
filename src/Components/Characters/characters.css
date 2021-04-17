@@ -1,0 +1,32 @@
+.characters_container{
+    display: flex;
+    flex-wrap: wrap;
+justify-items: center ;
+    align-items: center;
+}
+
+
+.characters_container img {
+    max-width: 58%;
+    border-radius: 60%;
+        width: 160px;
+        margin: 1rem;
+        overflow: hidden;
+        position: relative;
+        color: white;
+        cursor: pointer;
+
+
+}
+
+.character_info{
+    color: whitesmoke;
+
+    width: 160px;
+    /*margin: 1rem;*/
+    overflow: hidden;
+    position: relative;
+    color: white;
+    cursor: pointer;
+    margin: 4rem;
+}

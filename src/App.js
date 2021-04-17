@@ -7,24 +7,16 @@ import MovieModal from "./Components/MovieModal";
 import Characters from "./Components/Characters";
 
 const App = () => {
-
-     const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchedMovie, setSearchedMovie] = useState([])
-    const [currentMovie, setCurrentMovie] = useState([])
+    const [currentMovie, setCurrentMovie] = useState(null)
     const [movieGenre, setMovieGenre] = useState([])
-    const [person, setPerson] = useState([])
 
     const apiKey =  '547b4693cebd0509a71cadc54d008d4f'
-
-
-
-
-
     const fetchData = async (path, callback) => {
         try{
             const response = await axios.get(`https://api.themoviedb.org/3/${path}?api_key=${apiKey} `)
-                console.log('RE!!!!!!,', response.data)
             callback(response.data)
         } catch (e) {
             console.log('error', e)
@@ -35,94 +27,66 @@ const App = () => {
         Promise.all([
             fetchData('movie/top_rated', setMovies),
             fetchData('genre/movie/list', setMovieGenre),
-            fetchData('/person/', setPerson),
-
         ]).then(() => {
             setLoading(false)
         })
     }, [])
 
-
-
-
-    console.log('****', movieGenre)
-
-
     const  handleInputSubmit = (e) => {
         e.preventDefault()
-              axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchedMovie}`)
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchedMovie}`)
             .then((response) => {
-          setMovies(response.data.results)
+                setMovies(response.data)
             }, (error) => {
                 console.log(error);
             })
         setSearchedMovie('')
-  }
-  const handleInput = (e) => {
+    }
+    const handleInput = (e) => {
         setSearchedMovie(e.target.value)
-  }
+    }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <div className='search'>
-            <form onSubmit={handleInputSubmit}>
-
-                <input
-                    className='search'
-                    type='text'
-                    placeholder='Search...'
-                    onChange={ (e) => handleInput(e)}
-
-                />
-
-            </form>
-
-        </div>
-
-
-      </header>
-
-        <MovieModal
-        isOpen={currentMovie !== null}
-        onClose={() => setCurrentMovie(null)}
-        currentMov = {{...currentMovie}}
-        movieGenre={movieGenre.genres}
-
-        />
-
+    return (
+        <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <div className='search'>
+                    <form onSubmit={handleInputSubmit}>
+                        <input
+                            className='search'
+                            type='text'
+                            placeholder='Search...'
+                            onChange={ (e) => handleInput(e)}
+                        />
+                    </form>
+                </div>
+            </header>
+            <MovieModal
+                isOpen={currentMovie !== null}
+                onClose={() => setCurrentMovie(null)}
+                currentMov = {{...currentMovie}}
+                movieGenre={movieGenre.genres}
+                apiKey={apiKey}
+            />
             <div className={'movie-container'}>
                 {movies.results && movies.results.map((movie) => (
-                     <Movie
-                         key={movie.id}
-                         movie ={movie}
-                         movieId={movie.id}
-                         title={movie.title}
-                         overview={movie.overview}
-                         releaseDate={movie.release_date}
-                         posterPath = {movie.poster_path}
-                         apiKey={apiKey}
-                         handleClick={() => setCurrentMovie(movie)}
-                         isOverview
-                     />
+                    <Movie
+                        key={movie.id}
+                        movie ={movie}
+                        movieId={movie.id}
+                        title={movie.title}
+                        overview={movie.overview}
+                        releaseDate={movie.release_date}
+                        posterPath = {movie.poster_path}
+                        apiKey={apiKey}
+                        handleClick={() => setCurrentMovie(movie)}
+                        isOverview
+                    />
                 ))}
             </div>
-
-                            <div className={'characters'}>
-                                {movies.results && movies.results.map((movie) => (
-                                    <Characters
-                                        key={movie.id}
-                                        movie ={movie}
-                                        movieId={movie.id}
-                                        apiKey={apiKey}
-                                    /> ))}
-                                    </div>
-
-        {loading && 'Loading...'}
-    </div>
-  );
+            {loading && 'Loading...'}
+        </div>
+    );
 }
 
 export default App;

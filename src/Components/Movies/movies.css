@@ -1,10 +1,10 @@
 .movie{
- width: 200px;
+    width: 200px;
     margin: 1rem;
     overflow: hidden;
     position: relative;
     color: white;
-
+    cursor: pointer;
 }
 
 .movies_img{
@@ -13,16 +13,15 @@
 
 
 .move-desc-popup{
-position: absolute;
-
+    position: absolute;
     color: whitesmoke;
     left:0;
     right: 0;
     bottom:0;
-    background-color: #141414;
+    background-color: #3b3a3a;
     transform: translateY(105%);
     transition: transform 0.3s ease-in-out;
-
+    overflow: scroll;
 }
 
 .movie-desc{

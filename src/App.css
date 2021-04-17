@@ -6,7 +6,7 @@
 
 .App-header{
   background-color: #0d253f;
-padding:26px;
+  padding:26px;
   display: flex;
 }
 .App-logo {
@@ -14,12 +14,12 @@ padding:26px;
 }
 
 .movie-container{
-display: flex;
+  display: flex;
   flex-wrap: wrap;
 
 }
 .search {
-padding: 15px;
+  padding: 15px;
   margin-left: 50%;
   border-radius: 20px;
 }
