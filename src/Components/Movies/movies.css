@@ -34,7 +34,13 @@
 
 
 
-.movie_modal img {
-    border:solid whitesmoke 1px;
-    max-width: 51%
+.movie_modal  {
+    display: flex;
+    width: 700px;
+    color: whitesmoke;
+    justify-content: center;
+    flex-direction: row;
+    margin: 40px;
+    padding: 40px;
+    border-bottom-style: outset;
 }

@@ -28,6 +28,19 @@
   outline: 0;
 }
 
+.homepage{
+  left: -193px;
+  top: 24px;
+  transition: none 0s ease 0s;
+  cursor: pointer;
+  color: whitesmoke;
+}
+
+.MuiButton-label{
+color: whitesmoke;
+  font-weight: bolder;
+}
+
 
 
 

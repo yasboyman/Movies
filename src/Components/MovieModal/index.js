@@ -49,6 +49,7 @@ const MovieModal = ({isOpen, onClose, currentMov, movieGenre, apiKey}) => {
                         modalIsOn
                     />
                 </div>
+
                 <div className={'characters'}>
                     <Characters
                         key={currentMov.id}

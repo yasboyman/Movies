@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import axios from "axios";
+import './CastInfo.css'
 
 
 const CastInfo = ({ apiKey, actorName, currentCastID ,profilePath}) => {
@@ -18,13 +19,13 @@ const CastInfo = ({ apiKey, actorName, currentCastID ,profilePath}) => {
 
      const image_API = 'https://image.tmdb.org/t/p/w200';
 
-    console.log('THIS IS CASTS INFO /////',castInfo && castInfo)
-    console.log('//////', actorName)
-
     return(
-        <div>
-            {actorName}
+        <div className='actor_container'>
+            <h2>{actorName}</h2>
             {profilePath ?  <img src={`${image_API}${profilePath}`} alt={'title'}  /> : <div>No image</div>}
+            {    castInfo.birthday && <h5>  {castInfo.birthday}</h5> }
+            {    castInfo.place_of_birth && <h5>  {castInfo.place_of_birth}</h5> }
+            {    castInfo.biography && <h5 className='cast_biography'>  {castInfo.biography}</h5> }
         </div>
     )
 }

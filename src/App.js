@@ -4,6 +4,7 @@ import './App.css';
 import axios from "axios";
 import Movie from './Components/Movies/index'
 import MovieModal from "./Components/MovieModal";
+import {Button} from "@material-ui/core";
 import Characters from "./Components/Characters";
 
 const App = () => {
@@ -34,13 +35,15 @@ const App = () => {
 
     const  handleInputSubmit = (e) => {
         e.preventDefault()
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchedMovie}`)
+        searchedMovie && axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchedMovie}`)
             .then((response) => {
                 setMovies(response.data)
             }, (error) => {
                 console.log(error);
             })
+
         setSearchedMovie('')
+
     }
     const handleInput = (e) => {
         setSearchedMovie(e.target.value)
@@ -50,10 +53,12 @@ const App = () => {
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
+                <Button className='homepage' onClick={ () => fetchData('movie/top_rated', setMovies)} >Home/Popular</Button>
                 <div className='search'>
                     <form onSubmit={handleInputSubmit}>
                         <input
                             className='search'
+                            value={searchedMovie}
                             type='text'
                             placeholder='Search...'
                             onChange={ (e) => handleInput(e)}
