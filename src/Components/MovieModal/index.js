@@ -2,21 +2,21 @@ import React, {useEffect, useState} from 'react'
 import {Button, Modal} from '@material-ui/core';
 import './movie_modal.css';
 import Movie from "../Movies";
-import { FaWindowClose } from "react-icons/fa";
+import {FaWindowClose} from "react-icons/fa";
 import Characters from '../Characters';
 import axios from 'axios';
 
 const MovieModal = ({isOpen, onClose, currentMov, movieGenre, apiKey}) => {
     const [cast, setCast] = useState([])
 
-    useEffect( () => {
+    useEffect(() => {
         currentMov.id && axios.get(`https://api.themoviedb.org/3/movie/${currentMov.id}/credits?api_key=${apiKey}`)
             .then((response) => {
                 setCast(response.data)
             }, (error) => {
                 console.log(error);
             })
-    },[currentMov.id])
+    }, [currentMov.id])
 
     if (!currentMov) return null;
 
@@ -39,8 +39,8 @@ const MovieModal = ({isOpen, onClose, currentMov, movieGenre, apiKey}) => {
                 <h2 className='movie--modal-title'> {currentMov.title} </h2>
 
                 <div className={'movie_genre'}>
-                {genres && genres.map(genre =>
-                    <button>{genre.name} </button>)}
+                    {genres && genres.map(genre =>
+                        <button>{genre.name} </button>)}
                 </div>
                 <div className='movie-info'>
                     <Movie
@@ -53,7 +53,7 @@ const MovieModal = ({isOpen, onClose, currentMov, movieGenre, apiKey}) => {
                 <div className={'characters'}>
                     <Characters
                         key={currentMov.id}
-                        movie ={currentMov}
+                        movie={currentMov}
                         movieId={currentMov.id}
                         apiKey={apiKey}
                         cast={cast}

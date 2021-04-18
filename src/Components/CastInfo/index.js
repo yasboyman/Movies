@@ -17,12 +17,9 @@ const CastInfo = ({apiKey, actorName, currentCastID, profilePath}) => {
     }, [])
 
     const image_API = 'https://image.tmdb.org/t/p/w200';
-
     const handleIMBClick = () => {
-        castInfo.imdb_id &&  window.open(`https://www.imdb.com/name/${castInfo.imdb_id}`)
+        castInfo.imdb_id && window.open(`https://www.imdb.com/name/${castInfo.imdb_id}`)
     }
-
-    console.log(castInfo)
     return (
         <div className='actor_container'>
             <h2>{actorName}</h2>
@@ -30,7 +27,7 @@ const CastInfo = ({apiKey, actorName, currentCastID, profilePath}) => {
             {castInfo.birthday && <h5>  {castInfo.birthday}</h5>}
             {castInfo.place_of_birth && <h5>  {castInfo.place_of_birth}</h5>}
             {castInfo.biography && <h5 className='cast_biography'>  {castInfo.biography}</h5>}
-             <h5 style={{color: 'lightblue'}} onClick={handleIMBClick}> Link to IMDB</h5>
+            <h5 style={{color: 'lightblue'}} onClick={handleIMBClick}> Link to IMDB</h5>
 
         </div>
     )

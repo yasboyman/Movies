@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import logo from './assets/movie_logo.svg';
 import './App.css';
 import axios from "axios";
 import Movie from './Components/Movies/index'
 import MovieModal from "./Components/MovieModal";
 import {Button} from "@material-ui/core";
-import Characters from "./Components/Characters";
 
 const App = () => {
     const [movies, setMovies] = useState([]);
@@ -14,9 +13,9 @@ const App = () => {
     const [currentMovie, setCurrentMovie] = useState(null)
     const [movieGenre, setMovieGenre] = useState([])
 
-    const apiKey =  '547b4693cebd0509a71cadc54d008d4f'
+    const apiKey = '547b4693cebd0509a71cadc54d008d4f';
     const fetchData = async (path, callback) => {
-        try{
+        try {
             const response = await axios.get(`https://api.themoviedb.org/3/${path}?api_key=${apiKey} `)
             callback(response.data)
         } catch (e) {
@@ -33,7 +32,7 @@ const App = () => {
         })
     }, [])
 
-    const  handleInputSubmit = (e) => {
+    const handleInputSubmit = (e) => {
         e.preventDefault()
         searchedMovie && axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchedMovie}`)
             .then((response) => {
@@ -52,8 +51,9 @@ const App = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <Button className='homepage' onClick={ () => fetchData('movie/top_rated', setMovies)} >Home/Popular</Button>
+                <img src={logo} className="App-logo" alt="logo"/>
+                <Button className='homepage'
+                        onClick={() => fetchData('movie/top_rated', setMovies)}>Home/Popular</Button>
                 <div className='search'>
                     <form onSubmit={handleInputSubmit}>
                         <input
@@ -61,7 +61,7 @@ const App = () => {
                             value={searchedMovie}
                             type='text'
                             placeholder='Search...'
-                            onChange={ (e) => handleInput(e)}
+                            onChange={(e) => handleInput(e)}
                         />
                     </form>
                 </div>
@@ -69,7 +69,7 @@ const App = () => {
             <MovieModal
                 isOpen={currentMovie !== null}
                 onClose={() => setCurrentMovie(null)}
-                currentMov = {{...currentMovie}}
+                currentMov={{...currentMovie}}
                 movieGenre={movieGenre.genres}
                 apiKey={apiKey}
             />
@@ -77,12 +77,12 @@ const App = () => {
                 {movies.results && movies.results.map((movie) => (
                     <Movie
                         key={movie.id}
-                        movie ={movie}
+                        movie={movie}
                         movieId={movie.id}
                         title={movie.title}
                         overview={movie.overview}
                         releaseDate={movie.release_date}
-                        posterPath = {movie.poster_path}
+                        posterPath={movie.poster_path}
                         apiKey={apiKey}
                         handleClick={() => setCurrentMovie(movie)}
                         isOverview

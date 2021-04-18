@@ -7,7 +7,6 @@ const Characters = ({cast, apiKey}) => {
     const [currentCastInfo, setCurrentCastInfo] = useState('')
 
     if (!cast) return null;
-
     const cuttingArray = cast.cast && cast.cast.slice(0, 6)
 
     return (
