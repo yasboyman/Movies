@@ -1,6 +1,8 @@
 import React from 'react';
 import './movies.css'
 
+// component renders Data on UI- poster and overview
+
 const Movie = ({key, movie, movieId, title, overview, releaseDate, posterPath, apiKey, handleClick, modalIsOn}) => {
     const image_API = 'https://image.tmdb.org/t/p/w200'
 

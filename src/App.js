@@ -14,7 +14,8 @@ const App = () => {
     const [movieGenre, setMovieGenre] = useState([])
 
     const apiKey = '547b4693cebd0509a71cadc54d008d4f';
-    const fetchData = async (path, callback) => {
+
+    const fetchData = async (path, callback) => {              // fetches data based on FetchData function
         try {
             const response = await axios.get(`https://api.themoviedb.org/3/${path}?api_key=${apiKey} `)
             callback(response.data)
@@ -23,7 +24,7 @@ const App = () => {
         }
     }
 
-    useEffect(() => {
+    useEffect(() => {                   // sends endpoints as param and setsState
         Promise.all([
             fetchData('movie/top_rated', setMovies),
             fetchData('genre/movie/list', setMovieGenre),
@@ -32,7 +33,7 @@ const App = () => {
         })
     }, [])
 
-    const handleInputSubmit = (e) => {
+    const handleInputSubmit = (e) => {          // fetches search API renders to screen
         e.preventDefault()
         searchedMovie && axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchedMovie}`)
             .then((response) => {
@@ -66,7 +67,7 @@ const App = () => {
                     </form>
                 </div>
             </header>
-            <MovieModal
+            <MovieModal                                                 // Sends current movie info to MovieModal- pops up when clicked
                 isOpen={currentMovie !== null}
                 onClose={() => setCurrentMovie(null)}
                 currentMov={{...currentMovie}}
@@ -74,7 +75,7 @@ const App = () => {
                 apiKey={apiKey}
             />
             <div className={'movie-container'}>
-                {movies.results && movies.results.map((movie) => (
+                {movies.results && movies.results.map((movie) => (     // Maps through Movies state, sends props to Movie component
                     <Movie
                         key={movie.id}
                         movie={movie}

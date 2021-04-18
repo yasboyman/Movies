@@ -7,6 +7,8 @@ const CastInfo = ({apiKey, actorName, currentCastID, profilePath}) => {
 
     const [castInfo, setCastInfo] = useState([])
 
+    // fetches detailed cast info based on ID, id used from props sent via Character Component
+
     useEffect(() => {
         actorName && axios.get(`https://api.themoviedb.org/3/person/${currentCastID}?api_key=${apiKey}`)
             .then((response) => {
@@ -18,7 +20,7 @@ const CastInfo = ({apiKey, actorName, currentCastID, profilePath}) => {
 
     const image_API = 'https://image.tmdb.org/t/p/w200';
     const handleIMBClick = () => {
-        castInfo.imdb_id && window.open(`https://www.imdb.com/name/${castInfo.imdb_id}`)
+        castInfo.imdb_id && window.open(`https://www.imdb.com/name/${castInfo.imdb_id}`)    // sends us back to Popular page
     }
     return (
         <div className='actor_container'>

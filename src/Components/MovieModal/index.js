@@ -9,6 +9,8 @@ import axios from 'axios';
 const MovieModal = ({isOpen, onClose, currentMov, movieGenre, apiKey}) => {
     const [cast, setCast] = useState([])
 
+    // fetches cast data, sends to Character component as Props
+
     useEffect(() => {
         currentMov.id && axios.get(`https://api.themoviedb.org/3/movie/${currentMov.id}/credits?api_key=${apiKey}`)
             .then((response) => {
@@ -20,6 +22,7 @@ const MovieModal = ({isOpen, onClose, currentMov, movieGenre, apiKey}) => {
 
     if (!currentMov) return null;
 
+    // checks movie id === genre id - gives us genre array
     const genres = currentMov.genre_ids && movieGenre.filter(genre => currentMov.genre_ids.includes(genre.id))
 
 
@@ -43,7 +46,7 @@ const MovieModal = ({isOpen, onClose, currentMov, movieGenre, apiKey}) => {
                         <button>{genre.name} </button>)}
                 </div>
                 <div className='movie-info'>
-                    <Movie
+                    <Movie                                              //re-using Movie component
                         posterPath={currentMov.backdrop_path}
                         overview={currentMov.overview}
                         modalIsOn
@@ -51,7 +54,7 @@ const MovieModal = ({isOpen, onClose, currentMov, movieGenre, apiKey}) => {
                 </div>
 
                 <div className={'characters'}>
-                    <Characters
+                    <Characters                                     // Character Component receives data for cast info
                         key={currentMov.id}
                         movie={currentMov}
                         movieId={currentMov.id}
