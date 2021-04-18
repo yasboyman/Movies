@@ -52,7 +52,7 @@ const App = () => {
         <div className="App">
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo"/>
-                <Button className='homepage'
+                <Button
                         onClick={() => fetchData('movie/top_rated', setMovies)}>Home/Popular</Button>
                 <div className='search'>
                     <form onSubmit={handleInputSubmit}>
